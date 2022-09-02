@@ -19,7 +19,7 @@ ListTableRow.propTypes = {
 };
 
 export default function ListTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow }) {
-  const { uuid, name, avatarUrl, phone, group, gender, balance } = row;
+  const { id, name, avatarUrl, phone, group, gender, balance } = row;
   const [openMenu, setOpenMenuActions] = useState(null);
 
   const handleOpenMenu = (event) => {
@@ -39,9 +39,9 @@ export default function ListTableRow({ row, selected, onEditRow, onSelectRow, on
       <TableCell sx={{ display: 'flex', alignItems: 'center' }}>
         <Avatar alt={name} src={avatarUrl} sx={{ mr: 2 }} />
         <Typography variant="subtitle2" noWrap>
-          <Link to={PATH_BENEFICIARY.edit(uuid)} variant="body2" component={RouterLink}>
-            {name}
-          </Link>
+          {/* <Link to={PATH_BENEFICIARY.edit(id)} variant="body2" component={RouterLink}> */}
+          {name}
+          {/* </Link> */}
         </Typography>
       </TableCell>
 
@@ -51,10 +51,10 @@ export default function ListTableRow({ row, selected, onEditRow, onSelectRow, on
         {phone}
       </TableCell>
 
-      <TableCell align="center">{group}</TableCell>
-      <TableCell align="center">{balance}</TableCell>
+      <TableCell align="left">{group}</TableCell>
+      <TableCell align="left">{balance}</TableCell>
 
-      <TableCell align="right">
+      {/* <TableCell align="right">
         <TableMoreMenu
           open={openMenu}
           onOpen={handleOpenMenu}
@@ -83,7 +83,7 @@ export default function ListTableRow({ row, selected, onEditRow, onSelectRow, on
             </>
           }
         />
-      </TableCell>
+      </TableCell> */}
     </TableRow>
   );
 }

@@ -1,11 +1,11 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { Button, Card, CardHeader, Stack, Table, TableBody, TableCell, TableContainer, TableRow } from '@mui/material';
 import { useCallback, useEffect, useState } from 'react';
 import moment from 'moment';
+import { PulsatingIcon } from '../../assets';
 import useWSTransaction from '../../hooks/useTransactionTable';
 import { useTransactionTableContext } from '../../contexts/TransactionTableContext';
 import Scrollbar from '../Scrollbar';
-import { TableEmptyRows, TableHeadCustom, TableNoData } from '../table';
-import TransactionTableRow from './TransactionTableRow';
+import { TableHeadCustom } from '../table';
 
 const TransactionTable = () => {
   const { getListData } = useTransactionTableContext();
@@ -21,7 +21,7 @@ const TransactionTable = () => {
 
   useEffect(() => {
     return () => {
-      websocket?.close();
+      websocket?.current?.close();
     };
   }, [refreshCounter, websocket]);
 
@@ -29,7 +29,6 @@ const TransactionTable = () => {
     const data = await getListData();
     setList(data.data);
   }, []);
-  console.log('list', list);
 
   useEffect(() => {
     fetchTableData();
@@ -38,43 +37,68 @@ const TransactionTable = () => {
   const changeTableColor = (transactionDate) =>
     moment().isBefore(moment(transactionDate).add(10, 'seconds')) ? { backgroundColor: '#f0f0f0', color: 'black' } : {};
 
+  const TABLE_HEAD = [
+    { id: 'time', label: 'Time', align: 'left' },
+    { id: 'vendor', label: 'Vendor', align: 'left' },
+    { id: 'name', label: 'Beneficiary', align: 'left' },
+    { id: 'group', label: 'Amount', align: 'left' },
+    { id: 'blockNumber', label: 'Block Number', align: 'left' },
+  ];
+
   return (
-    <Scrollbar>
-      <TableContainer>
-        <Table sx={{ minWidth: 650 }} size="medium" aria-label="a dense table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Time</TableCell>
-              <TableCell>Vendor</TableCell>
-              <TableCell>Phone</TableCell>
-              <TableCell>Amount</TableCell>
-              <TableCell>Block Number</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {list?.map((item) => (
-              <TableRow key={item.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                <TableCell component="th" scope="row">
-                  {moment(item.createdAt).fromNow()}
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  {item.vendor}
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  {item.phone}
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  {item.amount}
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  {item.blockNumber}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Scrollbar>
+    <Card>
+      <Stack spacing={2} direction={{ xs: 'column', sm: 'row' }} sx={{ py: 2 }}>
+        <CardHeader
+          title={
+            <>
+              <PulsatingIcon>Transactions ( {`${list.length}`} )</PulsatingIcon>
+            </>
+          }
+        />
+      </Stack>
+      <Scrollbar>
+        <TableContainer>
+          <Table size="small">
+            <TableHeadCustom headLabel={TABLE_HEAD} />
+            <TableBody>
+              {list?.map((item) => (
+                <TableRow key={item.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                  <TableCell component="th" scope="row">
+                    {moment(item.createdAt).fromNow()}
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    <Button
+                      href={`https://www.blockchain.com/en/search?search=${item.vendor}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {item?.vendor?.slice(0, 6)}...{item?.vendor?.slice(-4)}
+                    </Button>
+                    {/* <a
+                      href={`https://www.blockchain.com/en/search?search=${item.vendor}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {item?.vendor?.slice(0, 6)}...{item?.vendor?.slice(-4)}
+                    </a> */}
+                    {/* {item.vendor} */}
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    {item.name}
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    {item.amount}
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    {item.blockNumber}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Scrollbar>
+    </Card>
   );
 };
 

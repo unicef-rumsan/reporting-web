@@ -51,7 +51,7 @@ const TABLE_HEAD = [
   { id: 'phone', label: 'Phone', align: 'left' },
   { id: 'group', label: 'Group', align: 'left' },
   { id: 'balance', label: 'Balance', align: 'center' },
-  { id: '', label: 'Action', align: 'center' },
+  // { id: '', label: 'Action', align: 'center' },
 ];
 
 // ----------------------------------------------------------------------

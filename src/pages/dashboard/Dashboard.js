@@ -37,7 +37,6 @@ export default function GeneralApp() {
   return (
     <Page title="Dashboard">
       <Container maxWidth={themeStretch ? false : 'xl'}>
-        <TransactionTable />
         <Grid container spacing={3}>
           <Grid item xs={12} md={8}>
             <AppWelcome
@@ -133,7 +132,8 @@ export default function GeneralApp() {
           </Grid>
 
           <Grid item xs={12} lg={8}>
-            <AppNewInvoice
+            <TransactionTable />
+            {/* <AppNewInvoice
               title="New Invoice"
               tableData={_appInvoices}
               tableLabels={[
@@ -143,7 +143,7 @@ export default function GeneralApp() {
                 { id: 'status', label: 'Status' },
                 { id: '' },
               ]}
-            />
+            /> */}
           </Grid>
 
           <Grid item xs={12} md={6} lg={4}>

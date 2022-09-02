@@ -111,6 +111,7 @@
     "redux": "^4.2.0",
     "redux-persist": "^6.0.0",
     "rehype-raw": "^6.1.1",
+    "sass": "^1.54.8",
     "simplebar": "^5.3.8",
     "simplebar-react": "^2.4.1",
     "slick-carousel": "^1.8.1",
