@@ -37,11 +37,16 @@ export default function GeneralApp() {
   return (
     <Page title="Dashboard">
       <Container maxWidth={themeStretch ? false : 'xl'}>
-        <Grid container spacing={3}>
+        <Grid item xs={12} md={8}>
+          <Grid item xs={12} lg={8}>
+            <TransactionTable />
+          </Grid>
+        </Grid>
+        {/* <Grid container spacing={3}>
           <Grid item xs={12} md={8}>
             <AppWelcome
-              title={`Welcome back! \n ${user?.displayName}`}
-              description="If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything."
+              title={`Welcome back! `}
+              // description="If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything."
               img={
                 <SeoIllustration
                   sx={{
@@ -56,16 +61,16 @@ export default function GeneralApp() {
           </Grid>
 
           <Grid item xs={12} md={4}>
-            <AppFeatured list={_appFeatured} />
+            <AppFeatured list={[_appFeatured]} />
           </Grid>
 
           <Grid item xs={12} md={4}>
             <AppWidgetSummary
               title="Total Active Users"
-              percent={2.6}
-              total={18765}
+              percent={''}
+              total={''}
               chartColor={theme.palette.primary.main}
-              chartData={[5, 18, 12, 51, 68, 11, 39, 37, 27, 20]}
+              chartData={[]}
             />
           </Grid>
 
@@ -75,7 +80,7 @@ export default function GeneralApp() {
               percent={0.2}
               total={4876}
               chartColor={theme.palette.chart.blue[0]}
-              chartData={[20, 41, 63, 33, 28, 35, 50, 46, 11, 26]}
+              // chartData={[20, 41, 63, 33, 28, 35, 50, 46, 11, 26]}
             />
           </Grid>
 
@@ -85,7 +90,7 @@ export default function GeneralApp() {
               percent={-0.1}
               total={678}
               chartColor={theme.palette.chart.red[0]}
-              chartData={[8, 9, 31, 8, 16, 37, 8, 33, 46, 31]}
+              chartData={[]}
             />
           </Grid>
 
@@ -98,12 +103,14 @@ export default function GeneralApp() {
                 theme.palette.primary.main,
                 theme.palette.primary.dark,
               ]}
-              chartData={[
-                { label: 'Mac', value: 12244 },
-                { label: 'Window', value: 53345 },
-                { label: 'iOS', value: 44313 },
-                { label: 'Android', value: 78343 },
-              ]}
+              chartData={
+                [
+                  // { label: 'Mac', value: 12244 },
+                  // { label: 'Window', value: 53345 },
+                  // { label: 'iOS', value: 44313 },
+                  // { label: 'Android', value: 78343 },
+                ]
+              }
             />
           </Grid>
 
@@ -133,17 +140,6 @@ export default function GeneralApp() {
 
           <Grid item xs={12} lg={8}>
             <TransactionTable />
-            {/* <AppNewInvoice
-              title="New Invoice"
-              tableData={_appInvoices}
-              tableLabels={[
-                { id: 'id', label: 'Invoice ID' },
-                { id: 'category', label: 'Category' },
-                { id: 'price', label: 'Price' },
-                { id: 'status', label: 'Status' },
-                { id: '' },
-              ]}
-            /> */}
           </Grid>
 
           <Grid item xs={12} md={6} lg={4}>
@@ -164,7 +160,7 @@ export default function GeneralApp() {
               <AppWidget title="Applications" total={55566} icon={'eva:email-fill'} color="warning" chartData={75} />
             </Stack>
           </Grid>
-        </Grid>
+        </Grid> */}
       </Container>
     </Page>
   );

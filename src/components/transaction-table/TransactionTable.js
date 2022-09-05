@@ -6,6 +6,7 @@ import useWSTransaction from '../../hooks/useTransactionTable';
 import { useTransactionTableContext } from '../../contexts/TransactionTableContext';
 import Scrollbar from '../Scrollbar';
 import { TableHeadCustom } from '../table';
+import truncateEthAddress from '../../utils/trimWalletAddress';
 
 const TransactionTable = () => {
   const { getListData } = useTransactionTableContext();
@@ -72,7 +73,7 @@ const TransactionTable = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      {item?.vendor?.slice(0, 6)}...{item?.vendor?.slice(-4)}
+                      {truncateEthAddress(item.vendor)}
                     </Button>
                     {/* <a
                       href={`https://www.blockchain.com/en/search?search=${item.vendor}`}

@@ -10,6 +10,11 @@ export const HOST_API = process.env.REACT_APP_REPORT_SERVER || '';
 
 export const REACT_APP_REPORT_SERVER = process.env.REACT_APP_TRANSACTION_REPORT_SERVER || 'http://localhost:4900';
 
+export const BLOCKCHAIN_HTTP_PROVIDER =
+  process.env.REACT_APP_BLOCKCHAIN_HTTP_PROVIDER || 'https://testnetwork.esatya.io';
+
+export const BLOCKCHAIN_SERVER_WS = process.env.REACT_APP_WEBSOCKET_PROVIDER || 'ws://195.179.200.228:8558';
+
 export const WSS_SERVER = REACT_APP_REPORT_SERVER.replace('http', 'ws');
 
 export const WSS_EVENTS = {
