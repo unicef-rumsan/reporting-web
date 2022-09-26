@@ -21,7 +21,7 @@ const visuallyHidden = {
 TableHeadCustom.propTypes = {
   onSort: PropTypes.func,
   orderBy: PropTypes.string,
-  headLabel: PropTypes.array,
+  headLabel: PropTypes.object,
   rowCount: PropTypes.number,
   numSelected: PropTypes.number,
   onSelectAllRows: PropTypes.func,
@@ -33,12 +33,16 @@ export default function TableHeadCustom({
   order,
   orderBy,
   rowCount = 0,
-  headLabel,
+  headLabel = {},
   numSelected = 0,
   onSort,
   onSelectAllRows,
   sx,
 }) {
+  headLabel = Object.keys(headLabel)
+    .map((key) => key)
+    .map((key) => headLabel[key]);
+
   return (
     <TableHead sx={sx}>
       <TableRow>

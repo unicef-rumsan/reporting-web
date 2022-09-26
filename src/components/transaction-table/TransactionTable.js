@@ -16,7 +16,9 @@ const TransactionTable = () => {
   const [list, setList] = useState([]);
 
   useEffect(() => {
+    console.log('wsTableData', wsTableData);
     if (!wsTableData?.data) return;
+
     setList((prev) => [wsTableData?.data, ...prev]);
   }, [wsTableData]);
 
@@ -38,13 +40,54 @@ const TransactionTable = () => {
   const changeTableColor = (transactionDate) =>
     moment().isBefore(moment(transactionDate).add(10, 'seconds')) ? { backgroundColor: '#f0f0f0', color: 'black' } : {};
 
-  const TABLE_HEAD = [
-    { id: 'time', label: 'Time', align: 'left' },
-    { id: 'vendor', label: 'Vendor', align: 'left' },
-    { id: 'name', label: 'Beneficiary', align: 'left' },
-    { id: 'group', label: 'Amount', align: 'left' },
-    { id: 'blockNumber', label: 'Block Number', align: 'left' },
-  ];
+  const TABLE_HEAD = {
+    time: {
+      id: 'time',
+      label: 'Timestamp',
+      align: 'left',
+    },
+    txHash: {
+      id: 'txHash',
+      label: 'TxHash',
+      align: 'left',
+    },
+    vendor: {
+      id: 'vendor',
+      label: 'Vendor',
+      align: 'left',
+    },
+    // beneficiary: {
+    //   id: 'beneficiary',
+    //   label: 'Beneficiary',
+    //   align: 'left',
+    // },
+    phone: {
+      id: 'phone',
+      label: 'phone',
+      align: 'left',
+    },
+    amount: {
+      id: 'amount',
+      label: 'Amount',
+      align: 'left',
+    },
+
+    ward: {
+      id: 'ward',
+      label: 'Ward',
+      align: 'left',
+    },
+    method: {
+      id: 'method',
+      label: 'Method',
+      align: 'left',
+    },
+    mode: {
+      id: 'mode',
+      label: 'Mode',
+      align: 'left',
+    },
+  };
 
   return (
     <Card>
@@ -52,7 +95,7 @@ const TransactionTable = () => {
         <CardHeader
           title={
             <>
-              <PulsatingIcon>Transactions ( {`${list.length}`} )</PulsatingIcon>
+              <PulsatingIcon>Claimed Transactions ( {`${list.length}`} )</PulsatingIcon>
             </>
           }
         />
@@ -69,29 +112,37 @@ const TransactionTable = () => {
                   </TableCell>
                   <TableCell component="th" scope="row">
                     <Button
+                      href={`https://www.blockchain.com/en/search?search=${item.txHash}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {truncateEthAddress(item.txHash)}
+                    </Button>
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    <Button
                       href={`https://www.blockchain.com/en/search?search=${item.vendor}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       {truncateEthAddress(item.vendor)}
                     </Button>
-                    {/* <a
-                      href={`https://www.blockchain.com/en/search?search=${item.vendor}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {item?.vendor?.slice(0, 6)}...{item?.vendor?.slice(-4)}
-                    </a> */}
-                    {/* {item.vendor} */}
                   </TableCell>
+
                   <TableCell component="th" scope="row">
-                    {item.name}
+                    {item.vendor}
                   </TableCell>
                   <TableCell component="th" scope="row">
                     {item.amount}
                   </TableCell>
                   <TableCell component="th" scope="row">
-                    {item.blockNumber}
+                    {item.ward}
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    {item.method}
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    {item.mode}
                   </TableCell>
                 </TableRow>
               ))}
