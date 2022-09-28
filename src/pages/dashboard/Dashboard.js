@@ -1,11 +1,12 @@
+import { useEffect } from 'react';
 // @mui
 import { useTheme } from '@mui/material/styles';
-import { Container, Grid, Stack, Button, Box } from '@mui/material';
+import { Container, Grid, Stack } from '@mui/material';
 // hooks
 import useAuth from '../../hooks/useAppAuth';
 import useSettings from '../../hooks/useSettings';
 // _mock_
-import { _appFeatured, _appAuthors, _appInstalled, _appRelated, _appInvoices } from '../../_mock';
+import { _appAuthors, _appInstalled, _appRelated } from '../../_mock';
 // components
 import Page from '../../components/Page';
 // sections
@@ -20,7 +21,9 @@ import {
 // assets
 import { TransactionTable } from '../../components';
 import ClaimBarchart from './components/ClaimBarchart';
+import ClaimBarchartWard from './components/ClaimBarchartWard';
 import AmountClaimVsBudget from './components/AmountClaimVsBudget';
+import { useModuleContext } from './context';
 
 // ----------------------------------------------------------------------
 
@@ -30,6 +33,28 @@ export default function GeneralApp() {
   const theme = useTheme();
 
   const { themeStretch } = useSettings();
+  const {
+    getBeneficiaryCountByGender,
+    countByGender,
+    countByMethod,
+    countByMode,
+    getTransactionsCountByMethod,
+    getTransactionsCountByMode,
+    getTransactionsCountByWard,
+    dashboardWardChartData,
+  } = useModuleContext();
+
+  useEffect(() => {
+    getBeneficiaryCountByGender();
+  }, [getBeneficiaryCountByGender]);
+
+  useEffect(() => {
+    getTransactionsCountByMethod();
+  }, [getTransactionsCountByMethod]);
+
+  useEffect(() => {
+    getTransactionsCountByMode();
+  }, [getTransactionsCountByMode]);
 
   return (
     <Page title="Dashboard">
@@ -38,27 +63,7 @@ export default function GeneralApp() {
           {/* TopMost Charts */}
           <>
             <Grid item xs={12} md={6}>
-              <ClaimBarchart
-                title="Ward Wise Claim"
-                subheader="(+43%) than last year"
-                chartLabels={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep']}
-                chartData={[
-                  {
-                    year: '2021',
-                    data: [
-                      { name: '1', data: [10, 41, 35, 51, 49, 62, 69, 91, 148] },
-                      { name: '2', data: [10, 34, 13, 56, 77, 88, 99, 77, 45] },
-                    ],
-                  },
-                  {
-                    year: '2022',
-                    data: [
-                      { name: '1', data: [148, 91, 69, 62, 49, 51, 35, 41, 10] },
-                      { name: '2', data: [45, 77, 99, 88, 77, 56, 13, 34, 10] },
-                    ],
-                  },
-                ]}
-              />
+              <ClaimBarchartWard graphType="bar" title="Ward Wise Claim" subheader="(+43%) than last year" />
             </Grid>
 
             <Grid item xs={12} md={3}>
@@ -80,10 +85,7 @@ export default function GeneralApp() {
               <AmountClaimVsBudget
                 title="Offline Vs Online"
                 chartColors={[theme.palette.primary.main, theme.palette.primary.light]}
-                chartData={[
-                  { label: 'Offline', value: 44313 },
-                  { label: 'Online', value: 78343 },
-                ]}
+                chartData={countByMode}
               />
             </Grid>
           </>
@@ -117,11 +119,13 @@ export default function GeneralApp() {
             <Grid item xs={12} md={3}>
               <AmountClaimVsBudget
                 title="Claimed By Gender"
-                chartColors={[theme.palette.primary.main, theme.palette.primary.light]}
-                chartData={[
-                  { label: 'Male', value: 12244 },
-                  { label: 'Female', value: 78343 },
+                chartColors={[
+                  theme.palette.primary.lighter,
+                  theme.palette.primary.light,
+                  theme.palette.primary.main,
+                  theme.palette.primary.dark,
                 ]}
+                chartData={countByGender}
               />
             </Grid>
             <Grid item xs={12} md={3}>
@@ -133,10 +137,7 @@ export default function GeneralApp() {
                   theme.palette.primary.main,
                   theme.palette.primary.dark,
                 ]}
-                chartData={[
-                  { label: 'QR', value: 44313 },
-                  { label: 'SMS', value: 78343 },
-                ]}
+                chartData={countByMethod}
               />
             </Grid>
           </>

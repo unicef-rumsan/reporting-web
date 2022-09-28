@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
 import merge from 'lodash/merge';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ReactApexChart from 'react-apexcharts';
 // @mui
 import { Card, CardHeader, Box, TextField } from '@mui/material';
 // components
 import { BaseOptionChart } from '../../../components/chart';
+import { useModuleContext } from '../context';
 
 // ----------------------------------------------------------------------
 
@@ -17,16 +18,22 @@ WardWiseClaim.propTypes = {
   chartLabels: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
-export default function WardWiseClaim({ title, subheader, chartLabels, chartData, graphType = 'bar', ...other }) {
+export default function WardWiseClaim({ title, subheader, graphType = 'bar', ...other }) {
   const [seriesData, setSeriesData] = useState(String(new Date().getFullYear()));
+
+  const { getTransactionsCountByWard, dashboardWardChartData } = useModuleContext();
 
   const handleChangeSeriesData = (event) => {
     setSeriesData(event.target.value);
   };
 
+  useEffect(() => {
+    getTransactionsCountByWard(seriesData);
+  }, [getTransactionsCountByWard, seriesData]);
+
   const chartOptions = merge(BaseOptionChart(), {
     xaxis: {
-      categories: chartLabels,
+      categories: dashboardWardChartData.chartLabel,
     },
   });
   return (
@@ -61,9 +68,9 @@ export default function WardWiseClaim({ title, subheader, chartLabels, chartData
               },
             }}
           >
-            {chartData.map((option) => (
-              <option key={option.year} value={option.year}>
-                {option.year}
+            {dashboardWardChartData.allAvailableYears.map((option) => (
+              <option key={option} value={option}>
+                {option}
               </option>
             ))}
           </TextField>
@@ -71,7 +78,12 @@ export default function WardWiseClaim({ title, subheader, chartLabels, chartData
       />
 
       <Box sx={{ mt: 3, mx: 3 }} dir="ltr">
-        <ReactApexChart type={graphType} series={chartData} options={chartOptions} height={364} />
+        <ReactApexChart
+          type={graphType}
+          series={dashboardWardChartData.chartData}
+          options={chartOptions}
+          height={364}
+        />
       </Box>
     </Card>
   );

@@ -1,12 +1,10 @@
-import { Button, Card, CardHeader, Stack, Table, TableBody, TableCell, TableContainer, TableRow } from '@mui/material';
+import { Card, CardHeader, Stack } from '@mui/material';
 import { useCallback, useEffect, useState } from 'react';
 import moment from 'moment';
 import { PulsatingIcon } from '../../assets';
 import useWSTransaction from '../../hooks/useTransactionTable';
 import { useTransactionTableContext } from '../../contexts/TransactionTableContext';
-import Scrollbar from '../Scrollbar';
-import { TableHeadCustom } from '../table';
-import truncateEthAddress from '../../utils/trimWalletAddress';
+import CustomTable from '../table/CustomTableBasic';
 
 const TransactionTable = () => {
   const { getListData } = useTransactionTableContext();
@@ -41,8 +39,8 @@ const TransactionTable = () => {
     moment().isBefore(moment(transactionDate).add(10, 'seconds')) ? { backgroundColor: '#f0f0f0', color: 'black' } : {};
 
   const TABLE_HEAD = {
-    time: {
-      id: 'time',
+    createdAt: {
+      id: 'timestamp',
       label: 'Timestamp',
       align: 'left',
     },
@@ -63,7 +61,7 @@ const TransactionTable = () => {
     // },
     phone: {
       id: 'phone',
-      label: 'phone',
+      label: 'Phone',
       align: 'left',
     },
     amount: {
@@ -100,56 +98,7 @@ const TransactionTable = () => {
           }
         />
       </Stack>
-      <Scrollbar>
-        <TableContainer>
-          <Table size="small">
-            <TableHeadCustom headLabel={TABLE_HEAD} />
-            <TableBody>
-              {list?.map((item) => (
-                <TableRow key={item.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                  <TableCell component="th" scope="row">
-                    {moment(item.createdAt).fromNow()}
-                  </TableCell>
-                  <TableCell component="th" scope="row">
-                    <Button
-                      href={`https://www.blockchain.com/en/search?search=${item.txHash}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {truncateEthAddress(item.txHash)}
-                    </Button>
-                  </TableCell>
-                  <TableCell component="th" scope="row">
-                    <Button
-                      href={`https://www.blockchain.com/en/search?search=${item.vendor}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {truncateEthAddress(item.vendor)}
-                    </Button>
-                  </TableCell>
-
-                  <TableCell component="th" scope="row">
-                    {item.vendor}
-                  </TableCell>
-                  <TableCell component="th" scope="row">
-                    {item.amount}
-                  </TableCell>
-                  <TableCell component="th" scope="row">
-                    {item.ward}
-                  </TableCell>
-                  <TableCell component="th" scope="row">
-                    {item.method}
-                  </TableCell>
-                  <TableCell component="th" scope="row">
-                    {item.mode}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Scrollbar>
+      <CustomTable size="small" tableHeadersList={TABLE_HEAD} tableRowsList={list} />
     </Card>
   );
 };

@@ -68,19 +68,6 @@ export default function Router() {
           ],
         },
 
-        {
-          path: 'user',
-          children: [
-            { element: <Navigate to="/dashboard/user/profile" replace />, index: true },
-            { path: 'profile', element: <UserProfile /> },
-            { path: 'cards', element: <UserCards /> },
-            { path: 'list', element: <UserList /> },
-            { path: 'new', element: <UserCreate /> },
-            { path: ':name/edit', element: <UserCreate /> },
-            { path: 'account', element: <UserAccount /> },
-          ],
-        },
-
         { path: 'permission-denied', element: <PermissionDenied /> },
       ],
     },
@@ -118,11 +105,6 @@ const Dashboard = Loadable(lazy(() => import('../pages/dashboard/index')));
 const Beneficiary = Loadable(lazy(() => import('../pages/beneficiary/index')));
 
 // USER
-const UserProfile = Loadable(lazy(() => import('../pages/dashboard/UserProfile')));
-const UserCards = Loadable(lazy(() => import('../pages/dashboard/UserCards')));
-const UserList = Loadable(lazy(() => import('../pages/dashboard/UserList')));
-const UserAccount = Loadable(lazy(() => import('../pages/dashboard/UserAccount')));
-const UserCreate = Loadable(lazy(() => import('../pages/dashboard/UserCreate')));
 
 // TEST RENDER PAGE BY ROLE
 const PermissionDenied = Loadable(lazy(() => import('../pages/dashboard/PermissionDenied')));

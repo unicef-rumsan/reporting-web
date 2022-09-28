@@ -17,6 +17,9 @@ export const BLOCKCHAIN_SERVER_WS = process.env.REACT_APP_WEBSOCKET_PROVIDER || 
 
 export const WSS_SERVER = REACT_APP_REPORT_SERVER.replace('http', 'ws');
 
+export const BLOCKCHAIN_EXPLORER =
+  process.env.REACT_APP_BLOCKCHAIN_EXPLORER || 'https://www.blockchain.com/en/search?search=';
+
 export const WSS_EVENTS = {
   welcome: 'welcome',
   notification: 'notification',
