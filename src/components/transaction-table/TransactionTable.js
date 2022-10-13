@@ -14,17 +14,17 @@ const TransactionTable = () => {
   const [list, setList] = useState([]);
 
   useEffect(() => {
-    console.log('wsTableData', wsTableData);
     if (!wsTableData?.data) return;
 
     setList((prev) => [wsTableData?.data, ...prev]);
   }, [wsTableData]);
 
-  useEffect(() => {
-    return () => {
-      websocket?.current?.close();
-    };
-  }, [refreshCounter, websocket]);
+  // useEffect(
+  //   () => () => {
+  //     websocket?.current?.close();
+  //   },
+  //   [refreshCounter, websocket]
+  // );
 
   const fetchTableData = useCallback(async () => {
     const data = await getListData();
@@ -35,12 +35,13 @@ const TransactionTable = () => {
     fetchTableData();
   }, [fetchTableData]);
 
-  const changeTableColor = (transactionDate) =>
-    moment().isBefore(moment(transactionDate).add(10, 'seconds')) ? { backgroundColor: '#f0f0f0', color: 'black' } : {};
+  // const changeTableColor = (transactionDate) =>
+  //   moment().isBefore(moment(transactionDate).add(10, 'seconds')) ? { backgroundColor: '#f0f0f0', color: 'black' } : {};
 
   const TABLE_HEAD = {
     createdAt: {
-      id: 'timestamp',
+      id: 'createdAt',
+      // id: 'timestamp',
       label: 'Timestamp',
       align: 'left',
     },
@@ -49,8 +50,8 @@ const TransactionTable = () => {
       label: 'TxHash',
       align: 'left',
     },
-    vendor: {
-      id: 'vendor',
+    name: {
+      id: 'name',
       label: 'Vendor',
       align: 'left',
     },

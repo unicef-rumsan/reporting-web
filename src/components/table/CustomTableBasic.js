@@ -31,12 +31,12 @@ export default function CustomTable({
             {truncateEthAddress(row)}
           </Button>
         );
-      case 'vendor':
-        return (
-          <Button href={`${BLOCKCHAIN_EXPLORER}${row}`} target="_blank" rel="noopener noreferrer">
-            {truncateEthAddress(row)}
-          </Button>
-        );
+      // case 'vendor':
+      //   return (
+      //     <Button href={`${BLOCKCHAIN_EXPLORER}${row}`} target="_blank" rel="noopener noreferrer">
+      //       {truncateEthAddress(row)}
+      //     </Button>
+      //   );
       case 'date':
         return moment(row).fromNow();
       case 'timestamp':
@@ -49,29 +49,13 @@ export default function CustomTable({
   };
 
   const renderTableCell = (list, head) =>
-    list.map((listItem) => (
-      <TableRow key={listItem.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+    list.map((listItem, index) => (
+      <TableRow key={`${listItem.id}-${index}`} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
         {Object.keys(head).map((headerKey) => {
           const tableKeyId = head[headerKey].id;
           return (
             <TableCell align={head[headerKey]?.align} component="th" scope="row" key={tableKeyId}>
               {conditionalRendering(listItem[tableKeyId], tableKeyId)}
-              {/* {
-                // eslint-disable-next-line no-nested-ternary
-                headerKey === 'createdAt' ? (
-                  moment(listItem[headerKey]).fromNow()
-                ) : headerKey === 'vendor' || headerKey === 'txHash' ? (
-                  <Button
-                    href={`${BLOCKCHAIN_EXPLORER}${listItem[tableKeyId]}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {truncateEthAddress(listItem[tableKeyId])}
-                  </Button>
-                ) : (
-                  listItem[tableKeyId]
-                )
-              } */}
             </TableCell>
           );
         })}

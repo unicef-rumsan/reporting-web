@@ -1,3 +1,3 @@
 import client from './client';
 
-export const transactionList = () => client.get('/transactions');
+export const transactionList = () => client.get('/claimAcquiredERC20Transactions');
