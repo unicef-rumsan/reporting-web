@@ -1,7 +1,17 @@
 const webpack = require('webpack');
 const WorkBoxPlugin = require('workbox-webpack-plugin');
+const { alias } = require('react-app-rewire-alias');
 
 module.exports = function override(config) {
+  alias({
+    '@pages': 'src/pages',
+    '@components': 'src/components',
+    '@utils': 'src/utils',
+    '@routes': 'src/routes',
+    '@hooks': 'src/hooks',
+    '@services': 'src/services',
+  })(config);
+
   config.resolve.fallback = {
     process: require.resolve('process/browser'),
     zlib: require.resolve('browserify-zlib'),

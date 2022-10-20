@@ -11,3 +11,7 @@ export const getTransactionsCountByMode = () => client.get('/reporting/transacti
 
 export const getTransactionsCountByWard = (year) =>
   client.get('/reporting/transactions/count-by-ward', { params: { year } });
+
+export const getBeneficiariesCounts = () => client.get('/reporting/beneficiary/counts');
+
+export const getBeneficiaryGroupingData = () => client.get('/reporting/beneficiary/grouping-data');

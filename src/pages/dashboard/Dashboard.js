@@ -20,10 +20,10 @@ import {
 } from './components';
 // assets
 import { TransactionTable } from '../../components';
-import ClaimBarchart from './components/ClaimBarchart';
 import ClaimBarchartWard from './components/ClaimBarchartWard';
 import AmountClaimVsBudget from './components/AmountClaimVsBudget';
 import { useModuleContext } from './context';
+import SummaryCard from './components/SummaryCard';
 
 // ----------------------------------------------------------------------
 
@@ -40,9 +40,11 @@ export default function GeneralApp() {
     countByMode,
     getTransactionsCountByMethod,
     getTransactionsCountByMode,
-    getTransactionsCountByWard,
-    dashboardWardChartData,
+    beneficiaryCounts,
+    getBeneficiariesCounts,
   } = useModuleContext();
+
+  console.log('beneficiaryCounts', beneficiaryCounts);
 
   useEffect(() => {
     getBeneficiaryCountByGender();
@@ -56,10 +58,25 @@ export default function GeneralApp() {
     getTransactionsCountByMode();
   }, [getTransactionsCountByMode]);
 
+  useEffect(() => {
+    getBeneficiariesCounts();
+  }, [getBeneficiariesCounts]);
+
   return (
     <Page title="Dashboard">
       <Container maxWidth={themeStretch ? false : 'xl'}>
         <Grid container spacing={3}>
+          <Grid item xs={12} md={4}>
+            <SummaryCard title="Total Beneficiaries Impacted" total={beneficiaryCounts?.impacted?.totalFamilyCount} />
+          </Grid>
+
+          <Grid item xs={12} md={4}>
+            <SummaryCard title="Total Beneficiaries Claimed" total={4876} />
+          </Grid>
+
+          <Grid item xs={12} md={4}>
+            <SummaryCard title="Children Below 5" total={beneficiaryCounts?.impacted?.totalBelow5Count} />
+          </Grid>
           {/* TopMost Charts */}
           <>
             <Grid item xs={12} md={6}>
@@ -91,31 +108,6 @@ export default function GeneralApp() {
           </>
           {/* 2nd  Charts */}
           <>
-            <Grid item xs={12} md={6}>
-              <ClaimBarchart
-                title="Claim Against Time"
-                graphType="line"
-                subheader="(+43%) than last year"
-                chartLabels={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep']}
-                chartData={[
-                  {
-                    year: '2021',
-                    data: [
-                      { name: '1', data: [10, 41, 35, 51, 49, 62, 69, 91, 148] },
-                      { name: '2', data: [10, 34, 13, 56, 77, 88, 99, 77, 45] },
-                    ],
-                  },
-                  {
-                    year: '2022',
-                    data: [
-                      { name: '1', data: [148, 91, 69, 62, 49, 51, 35, 41, 10] },
-                      { name: '2', data: [45, 77, 99, 88, 77, 56, 13, 34, 10] },
-                    ],
-                  },
-                ]}
-              />
-            </Grid>
-
             <Grid item xs={12} md={3}>
               <AmountClaimVsBudget
                 title="Claimed By Gender"

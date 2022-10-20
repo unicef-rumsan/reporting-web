@@ -67,6 +67,7 @@ export default function Router() {
             { path: ':uuid/edit', element: <Beneficiary page="edit" /> },
           ],
         },
+        { path: 'reports', element: <ReportCharts /> },
 
         { path: 'permission-denied', element: <PermissionDenied /> },
       ],
@@ -104,7 +105,8 @@ const Dashboard = Loadable(lazy(() => import('../pages/dashboard/index')));
 // Beneficiary
 const Beneficiary = Loadable(lazy(() => import('../pages/beneficiary/index')));
 
-// USER
+// REPORT CHARTS
+const ReportCharts = Loadable(lazy(() => import('../pages/report-charts/index')));
 
 // TEST RENDER PAGE BY ROLE
 const PermissionDenied = Loadable(lazy(() => import('../pages/dashboard/PermissionDenied')));

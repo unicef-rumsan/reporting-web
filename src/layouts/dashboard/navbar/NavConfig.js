@@ -1,5 +1,5 @@
 // routes
-import { PATH_DASHBOARD, PATH_PAGE, PATH_BENEFICIARY } from '../../../routes/paths';
+import { PATH_DASHBOARD, PATH_PAGE, PATH_BENEFICIARY, PATH_REPORT_CHARTS } from '../../../routes/paths';
 // components
 import Label from '../../../components/Label';
 import Iconify from '../../../components/Iconify';
@@ -14,7 +14,7 @@ const ICONS = {
   beneficiary: getIcon('ic_booking'),
   vendors: getIcon('ic_invoice'),
   dashboard: getIcon('ic_dashboard'),
-  menuItem: getIcon('ic_menu_item'),
+  reports: getIcon('ic_analytics'),
 };
 
 const navConfig = [
@@ -44,7 +44,12 @@ const navConfig = [
       {
         title: 'beneficiary',
         path: PATH_BENEFICIARY.root,
-        icon: ICONS.dashboard,
+        icon: ICONS.user,
+      },
+      {
+        title: 'Reports',
+        path: PATH_REPORT_CHARTS.root,
+        icon: ICONS.reports,
       },
     ],
   },

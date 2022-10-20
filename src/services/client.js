@@ -5,6 +5,7 @@ import { HOST_API } from '../config';
 import { getAccessToken } from '../utils/sessionManager';
 
 const accessToken = getAccessToken();
+const projectId = '6322e108728b5f001ba00202';
 
 const api = axios.create({
   //   baseURL: 'https://minimal-assets-api-dev.vercel.app',
@@ -12,6 +13,7 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
     accessToken,
+    projectId,
   },
   paramsSerializer: (params) => qs.stringify(params, { arrayFormat: 'brackets' }),
 });

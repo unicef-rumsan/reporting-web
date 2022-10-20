@@ -4,6 +4,7 @@ import {
   getTransactionsCountByMethod,
   getTransactionsCountByMode,
   getTransactionsCountByWard,
+  getBeneficiariesCounts,
 } from '../../services/reporting';
 
 export default {
@@ -12,4 +13,5 @@ export default {
   getTransactionsCountByMethod,
   getTransactionsCountByMode,
   getTransactionsCountByWard,
+  getBeneficiariesCounts,
 };

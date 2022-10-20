@@ -2,12 +2,20 @@
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
-    "baseUrl": "."
+    "baseUrl": "./src",
+    "paths": {
+      "@pages/*": ["pages/*"],
+      "@components/*": ["components/*"],
+      "@components": ["components/index.js"],
+      "@utils/*": ["utils/*"],
+      "@utils": ["utils/index.js"],
+      "@routes/*": ["routes/*"],
+      "@hooks/*": ["hooks/*"],
+      "@hooks": ["hooks/index.js"],
+      "@services/*": ["services/*"],
+      "@services": ["services/index.js"]
+    }
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
 }

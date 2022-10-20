@@ -7,6 +7,7 @@ function path(root, sublink) {
 const ROOTS_AUTH = '/auth';
 const ROOTS_DASHBOARD = '';
 const ROOTS_BENEFICIARY = '/beneficiaries';
+const ROOTS_REPORT_CHARTS = '/reports';
 
 // ----------------------------------------------------------------------
 
@@ -34,6 +35,10 @@ export const PATH_BENEFICIARY = {
   root: ROOTS_BENEFICIARY,
   create: path(ROOTS_BENEFICIARY, '/create'),
   edit: (uuid) => path(ROOTS_BENEFICIARY, `/${uuid}/edit`),
+};
+
+export const PATH_REPORT_CHARTS = {
+  root: ROOTS_REPORT_CHARTS,
 };
 
 export const PATH_DASHBOARD = {
