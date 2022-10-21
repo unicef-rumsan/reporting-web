@@ -52,7 +52,7 @@ const TransactionTable = () => {
     },
     name: {
       id: 'name',
-      label: 'Vendor',
+      label: 'Beneficiary',
       align: 'left',
     },
     // beneficiary: {
@@ -60,11 +60,11 @@ const TransactionTable = () => {
     //   label: 'Beneficiary',
     //   align: 'left',
     // },
-    phone: {
-      id: 'phone',
-      label: 'Phone',
-      align: 'left',
-    },
+    // phone: {
+    //   id: 'phone',
+    //   label: 'Phone',
+    //   align: 'left',
+    // },
     amount: {
       id: 'amount',
       label: 'Amount',

@@ -13,7 +13,7 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
     accessToken,
-    projectId,
+    // projectId,
   },
   paramsSerializer: (params) => qs.stringify(params, { arrayFormat: 'brackets' }),
 });

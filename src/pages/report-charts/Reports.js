@@ -46,6 +46,15 @@ export default function Reports({ title }) {
                 chartData={groupingData.ageRange.chartData}
               />
             </Grid>
+            <Grid item xs={12} md={6}>
+              <Barchart
+                graphType="line"
+                title="Some Report"
+                subheader="(+43%) than last year"
+                chartLabels={groupingData.ageRange.chartLabels}
+                chartData={groupingData.ageRange.chartData}
+              />
+            </Grid>
             <Grid item xs={12} md={4}>
               <Piechart
                 title="Daily Wage"
