@@ -13,6 +13,7 @@ const initialState = {
     disability: [],
     phoneOwnership: [],
     hasBank: [],
+    hasPhone: [],
   },
   getGroupingData: () => {},
 };

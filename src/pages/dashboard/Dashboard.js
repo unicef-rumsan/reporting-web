@@ -1,14 +1,17 @@
+/* eslint-disable import/no-unresolved */
 import { useEffect } from 'react';
 // @mui
 import { useTheme } from '@mui/material/styles';
 import { Container, Grid, Stack } from '@mui/material';
 // hooks
-import useAuth from '../../hooks/useAppAuth';
+import Page from '@components/Page';
+import { TransactionTable } from '@components';
+import useAuth from '@hooks/useAppAuth';
 import useSettings from '../../hooks/useSettings';
 // _mock_
 import { _appAuthors, _appInstalled, _appRelated } from '../../_mock';
 // components
-import Page from '../../components/Page';
+
 // sections
 import {
   AppWidget,
@@ -19,7 +22,6 @@ import {
   AppTopInstalledCountries,
 } from './components';
 // assets
-import { TransactionTable } from '../../components';
 import ClaimBarchartWard from './components/ClaimBarchartWard';
 import AmountClaimVsBudget from './components/AmountClaimVsBudget';
 import { useModuleContext } from './context';
@@ -43,8 +45,6 @@ export default function GeneralApp() {
     beneficiaryCounts,
     getBeneficiariesCounts,
   } = useModuleContext();
-
-  console.log('beneficiaryCounts', beneficiaryCounts);
 
   useEffect(() => {
     getBeneficiaryCountByGender();

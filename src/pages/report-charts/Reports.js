@@ -25,7 +25,7 @@ export default function Reports({ title }) {
     getGroupingData();
   }, [getGroupingData]);
 
-  console.log('first', groupingData);
+  console.log('wardData', groupingData);
 
   return (
     <Container maxWidth={themeStretch ? false : 'lg'}>
@@ -53,6 +53,30 @@ export default function Reports({ title }) {
                 subheader="(+43%) than last year"
                 chartLabels={groupingData.ageRange.chartLabels}
                 chartData={groupingData.ageRange.chartData}
+              />
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Piechart
+                title="Has Bank"
+                chartColors={[
+                  theme.palette.primary.dark,
+                  theme.palette.primary.light,
+                  theme.palette.primary.lighter,
+                  theme.palette.primary.main,
+                ]}
+                chartData={groupingData?.hasBank}
+              />
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Piechart
+                title="Has Phone"
+                chartColors={[
+                  theme.palette.primary.dark,
+                  theme.palette.primary.light,
+                  theme.palette.primary.lighter,
+                  theme.palette.primary.main,
+                ]}
+                chartData={groupingData?.hasPhone}
               />
             </Grid>
             <Grid item xs={12} md={4}>
