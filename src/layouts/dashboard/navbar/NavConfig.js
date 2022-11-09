@@ -36,18 +36,23 @@ const navConfig = [
     subheader: 'general',
     items: [
       {
-        title: 'dashboard',
+        title: 'Real Time Reports',
         path: PATH_DASHBOARD.general.app,
         icon: ICONS.dashboard,
       },
+      // {
+      //   title: 'dashboard',
+      //   path: PATH_DASHBOARD.general.app,
+      //   icon: ICONS.dashboard,
+      // },
 
       {
-        title: 'beneficiary',
+        title: 'Demographic Reports',
         path: PATH_BENEFICIARY.root,
         icon: ICONS.user,
       },
       {
-        title: 'Reports',
+        title: 'Anomaly Reports',
         path: PATH_REPORT_CHARTS.root,
         icon: ICONS.reports,
       },

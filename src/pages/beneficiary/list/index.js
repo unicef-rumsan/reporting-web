@@ -95,7 +95,7 @@ export default function List({ title }) {
 
   const [filterRole, setFilterRole] = useState('all');
 
-  const { currentTab: filterStatus, onChangeTab: onChangeFilterStatus } = useTabs('all');
+  const { currentTab: filterStatus, onChangeBar: onChangeFilterStatus } = useTabs('all');
 
   const tableData = useApi(Service.list, { defaultDataState: [] });
   const requestTableData = useCallback(() => tableData.request(currentTableState), []);

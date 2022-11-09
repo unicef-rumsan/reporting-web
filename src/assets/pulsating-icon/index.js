@@ -1,10 +1,9 @@
 import React from 'react';
 import './pulsating.scss';
 
-const PulsatingIcon = ({ children }) => (
+const PulsatingIcon = () => (
   <>
     <div className="pulsating" />
-    {children}
   </>
 );
 

@@ -1,4 +1,4 @@
-import { Card, CardHeader, Stack } from '@mui/material';
+import { Card, CardHeader, Grid, Stack, Typography } from '@mui/material';
 import { useCallback, useEffect, useState } from 'react';
 import moment from 'moment';
 import { PulsatingIcon } from '../../assets';
@@ -15,7 +15,6 @@ const TransactionTable = () => {
 
   useEffect(() => {
     if (!wsTableData?.data) return;
-
     setList((prev) => [wsTableData?.data, ...prev]);
   }, [wsTableData]);
 
@@ -40,7 +39,7 @@ const TransactionTable = () => {
 
   const TABLE_HEAD = {
     createdAt: {
-      id: 'createdAt',
+      id: 'timestamp',
       // id: 'timestamp',
       label: 'Timestamp',
       align: 'left',
@@ -55,11 +54,7 @@ const TransactionTable = () => {
       label: 'Beneficiary',
       align: 'left',
     },
-    // beneficiary: {
-    //   id: 'beneficiary',
-    //   label: 'Beneficiary',
-    //   align: 'left',
-    // },
+
     // phone: {
     //   id: 'phone',
     //   label: 'Phone',
@@ -93,9 +88,12 @@ const TransactionTable = () => {
       <Stack spacing={2} direction={{ xs: 'column', sm: 'row' }} sx={{ py: 2 }}>
         <CardHeader
           title={
-            <>
-              <PulsatingIcon>Claimed Transactions ( {`${list.length}`} )</PulsatingIcon>
-            </>
+            <Grid container spacing={0.5}>
+              <PulsatingIcon />
+              <Typography variant="h6" sx={{ mt: -1.8 }}>
+                Claimed Transactions ( {`${list.length}`} )
+              </Typography>
+            </Grid>
           }
         />
       </Stack>

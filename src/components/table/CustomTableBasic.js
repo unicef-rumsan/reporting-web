@@ -1,4 +1,4 @@
-import { Button, Table, TableBody, TableCell, TableContainer, TableRow } from '@mui/material';
+import { Button, Chip, Table, TableBody, TableCell, TableContainer, TableRow } from '@mui/material';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import TableHeadCustom from './TableHeadCustom';
@@ -40,9 +40,10 @@ export default function CustomTable({
       case 'date':
         return moment(row).fromNow();
       case 'timestamp':
-        return moment(row).fromNow();
+        return moment.unix(row).fromNow();
       case 'createdAt':
         return moment(row).fromNow();
+
       default:
         return row;
     }
@@ -55,7 +56,7 @@ export default function CustomTable({
           const tableKeyId = head[headerKey].id;
           return (
             <TableCell align={head[headerKey]?.align} component="th" scope="row" key={tableKeyId}>
-              {conditionalRendering(listItem[tableKeyId], tableKeyId)}
+              {listItem[tableKeyId] ? conditionalRendering(listItem[tableKeyId], tableKeyId) : <Chip label="N/A" />}
             </TableCell>
           );
         })}

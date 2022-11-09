@@ -85,7 +85,7 @@ export default function AmountClaimVsBudget({ title, subheader, chartData, chart
       <CardHeader title={title} subheader={subheader} />
 
       <ChartWrapperStyle dir="ltr">
-        <ReactApexChart type="pie" series={chartSeries} options={chartOptions} height={280} />
+        <ReactApexChart type="donut" series={chartSeries} options={chartOptions} height={280} />
       </ChartWrapperStyle>
     </Card>
   );

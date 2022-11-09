@@ -25,8 +25,6 @@ export default function Reports({ title }) {
     getGroupingData();
   }, [getGroupingData]);
 
-  console.log('wardData', groupingData);
-
   return (
     <Container maxWidth={themeStretch ? false : 'lg'}>
       <HeaderBreadcrumbs
